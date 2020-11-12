@@ -15,7 +15,7 @@ As far we:
 2. copy file [config.sample.yml](/config.sample.yml) to `config.yml` and fill the gaps.
 3. export env var as follows:
 
-```
+```bash
 export CF_API=https://api.to.your.cloudfoundry
 export CF_USER='admin-user'
 export CF_PASSWORD='admin-password'
@@ -34,7 +34,7 @@ export CF_PUBLIC_DOMAIN='pub.app.cf.bgl.hbx.geo.francetelecom.fr'
 
 ## Tests availables
 
-- `runtime`: **Default tests always run**, test that ensure important features for running and managing apps works (deploy, scale, delete, logs, ssh) 
+- `runtime`: **Default tests always ran**, test that ensure important features for running and managing apps works (deploy, scale, delete, logs, ssh) 
 - `uaa-auth`: Tests to ensure that uaa-auth service through [gobis](https://github.com/orange-cloudfoundry/gobis-server) works
 - `isolation-segments`: Tests to ensure that isolation segments works (with a shared/public separation architecture)
 
