@@ -16,7 +16,7 @@ As far we:
 3. export env var as follows:
 
 ```bash
-export CF_API=https://api.to.your.cloudfoundry
+export CF_API='https://api.to.your.cloudfoundry'
 export CF_USER='admin-user'
 export CF_PASSWORD='admin-password'
 export CF_ORG='cfrobot-cats-org'
