@@ -1,0 +1,11 @@
+# choose to skip ssl or not for request on cf cli
+skip_ssl_validation: false
+# set to true to skip verify cert on request made by python for accessing an app url
+python_request_verify_cert: false
+# protocol scheme to use when aking request to an app (can be http or https)
+url_protocol: https
+# Set route service catalog available by gobis (see: https://github.com/orange-cloudfoundry/gobis-server )
+# note: if you run test without including gobis this is optional
+gobis_route_service:
+  service_name: uaa-auth
+  plan_name: uaa-users-auth

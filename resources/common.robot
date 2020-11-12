@@ -9,7 +9,7 @@ Library           OperatingSystem
 *** Variables ***
 ${DEFAULT_MEMORY_LIMIT}       256M
 ${DEFAULT_DISK_LIMIT}         512M
-
+${app_binary_folder}          ./assets/binary
 *** Keywords ***
 I push an app named ${name:[^ ]*} with buildpack ${buildpack:[^ ]*} from folder ${dir}
     ${buildpack_final}=   get first buildpack   ${buildpack}
