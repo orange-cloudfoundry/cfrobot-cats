@@ -23,10 +23,10 @@ export CF_APP_NAME='app-cfrobot-cats'
 export CF_DOMAIN='app.domain.of.your.cloudfoundry'
 
 # this next env var is optionnal, this is necessary if you run `isolation-segments` tests
-export CF_PUBLIC_DOMAIN='pub.app.cf.bgl.hbx.geo.francetelecom.fr'
+export CF_PUBLIC_DOMAIN='pub.app.domain'
 
 # this next env var is optionnal, this is necessary if you run `logservice` tests
-export LOGSERVICE_URI='https://logservice.cf.bgl.hbx.geo.francetelecom.fr'
+export LOGSERVICE_URI='https://logservice.domain.of.your.cloudfoundry'
 ```
 
 4. run `run-tests.sh [tests] [to] [include]` (e.g.: `run-tests.sh uaa-auth`)
