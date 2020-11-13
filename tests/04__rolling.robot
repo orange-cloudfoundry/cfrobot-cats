@@ -22,11 +22,13 @@ Rolling an app is useable
 I store previous instance id for app ${name}
     Create Session  get_instance_id_${name}   ${url_protocol}://${name}.%{CF_DOMAIN}   verify=${python_request_verify_cert}
     ${resp}=  Get Request   get_instance_id_${name}   /env   allow_redirects=${False}
+    Log   ${resp.text}
     ${instance_guid}=   Get From Dictionary   ${resp.json()}  INSTANCE_GUID
     Set Global Variable   ${previous_instance_id}   ${instance_guid}
 
 I expect that instance id change for app ${name}
     Create Session  get_instance_id_${name}   ${url_protocol}://${name}.%{CF_DOMAIN}   verify=${python_request_verify_cert}
     ${resp}=  Get Request   get_instance_id_${name}   /env   allow_redirects=${False}
+    Log   ${resp.text}
     ${instance_guid}=   Get From Dictionary   ${resp.json()}  INSTANCE_GUID
     Should Not Be Equal   ${instance_guid}  ${previous_instance_id}

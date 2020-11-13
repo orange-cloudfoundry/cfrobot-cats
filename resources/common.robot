@@ -47,7 +47,7 @@ I push default binary app named ${name:[^ ]*} with rolling strategy
     ${buildpack}=   get first buildpack   binary_buildpack
     ${result}=  cf  push   -b  ${buildpack}  -m  30M   -k  16M  -p  ${app_binary_folder}  --strategy  rolling  ${name}
     Log   ${result}
-    Sleep  5s
+    Sleep  10s
 
 I expect app ${name:[^ ]*} from instance ${instance} to contains response "${expected_response}"
     ${app_guid}=  cf  app   ${name}   --guid
