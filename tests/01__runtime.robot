@@ -19,9 +19,6 @@ App can be pushed scaled and deleted
 User can see logs
     When I push default binary app named %{CF_APP_NAME}
     Then I can have my logs from app %{CF_APP_NAME}
-App can be downloaded
-    When I push default binary app named %{CF_APP_NAME}
-    Then I download app %{CF_APP_NAME} and match file app with source dir ${app_binary_folder} on both side
 User can ssh into app
     When I push default binary app named %{CF_APP_NAME}
     Then I run command /usr/bin/env in ssh in app %{CF_APP_NAME} and expect to result to VCAP_APPLICATION=.*"application_name":"%{CF_APP_NAME}"
