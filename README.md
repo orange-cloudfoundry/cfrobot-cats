@@ -19,13 +19,14 @@ As far we:
 export CF_API='https://api.to.your.cloudfoundry'
 export CF_USER='admin-user'
 export CF_PASSWORD='admin-password'
-export CF_ORG='cfrobot-cats-org'
-export CF_SPACE='cfrobot-cats-space'
-export CF_BINARY_APP_NAME='binary-app'
+export CF_APP_NAME='app-cfrobot-cats'
 export CF_DOMAIN='app.domain.of.your.cloudfoundry'
 
 # this next env var is optionnal, this is necessary if you run `isolation-segments` tests
 export CF_PUBLIC_DOMAIN='pub.app.cf.bgl.hbx.geo.francetelecom.fr'
+
+# this next env var is optionnal, this is necessary if you run `logservice` tests
+export LOGSERVICE_URI='https://logservice.cf.bgl.hbx.geo.francetelecom.fr'
 ```
 
 4. run `run-tests.sh [tests] [to] [include]` (e.g.: `run-tests.sh uaa-auth`)
@@ -35,6 +36,12 @@ export CF_PUBLIC_DOMAIN='pub.app.cf.bgl.hbx.geo.francetelecom.fr'
 ## Tests availables
 
 - `runtime`: **Default tests always ran**, test that ensure important features for running and managing apps works (deploy, scale, delete, logs, ssh) 
-- `uaa-auth`: Tests to ensure that uaa-auth service through [gobis](https://github.com/orange-cloudfoundry/gobis-server) works
-- `isolation-segments`: Tests to ensure that isolation segments works (with a shared/public separation architecture)
+- `isolation-segments`: Ensure that isolation segments works (with a shared/public separation architecture)
+- `service-discovery`: Ensure that discovery service and policies are working
+- `rolling`: Ensure that **native** rolling with cli v7 is working
+- `feature-flags`: Ensure that feature flags configured in `config.yml` are set in state wanted.
+- `uaa-auth`: Ensure that uaa-auth service through [gobis](https://github.com/orange-cloudfoundry/gobis-server) works
+- `cfsecurity`: Ensure that [cfsecurity entitlement](https://github.com/orange-cloudfoundry/cf-security-entitlement) is working correctly
+(this is necessary to install cf cli plugin with command `cf install-plugin -r CF-Community "cf-security-entitlement"`)
+- `logservice`: Ensure that [logservice](https://github.com/orange-cloudfoundry/logservice-boshrelease/) is taking logs from an app
 

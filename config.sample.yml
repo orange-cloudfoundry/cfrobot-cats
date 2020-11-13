@@ -4,8 +4,34 @@ skip_ssl_validation: false
 python_request_verify_cert: false
 # protocol scheme to use when aking request to an app (can be http or https)
 url_protocol: https
+# Org to use to perform tests (this org will be created)
+org_name: smoke-test-org
+# Space to use to perform tests (this space will be created)
+space_name: smoke-test-space
+# Use an other cli path (by default set `cf` for let your env choose correct cf cli path to use)
+cf_cli_path: cf
+# Information for creating a simple user without admin rights
+simple_user:
+  username: smoke-user
+# Optional, set it if you use `isolation-segments` test
+isolation_segments:
+  # set segment name to use
+  segment_name: public
+  # space to create with this isolation segment set on it
+  space_name: smoke-test-space-public
+# Optional, set it if you use `logservice` test
+# Set logservice catalog available
+logservice:
+  service_name: uaa-auth
+  plan_name: uaa-users-auth
+# Optional, set it if you use `uaa-auth` test
 # Set route service catalog available by gobis (see: https://github.com/orange-cloudfoundry/gobis-server )
-# note: if you run test without including gobis this is optional
 gobis_route_service:
   service_name: uaa-auth
   plan_name: uaa-users-auth
+# Optional, set it if you use `service-discovery` test
+default_internal_domain: apps.internal
+# map of flag you want enabled or disabled
+# Optional, set it if you use `feature-flags` test
+expected_feature_flags:
+  diego_docker: disabled

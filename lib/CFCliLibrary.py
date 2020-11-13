@@ -2,6 +2,7 @@ import os
 import shutil
 import tempfile
 import zipfile
+from os.path import expanduser
 
 import urllib3
 from robot.libraries.Process import Process
@@ -11,10 +12,10 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class CFCliLibrary(object):
 
-    def __init__(self):
-        print("used")
+    def __init__(self, cf_cli_path="cf"):
         os.makedirs("./.cf_home", exist_ok=True)
         self._process = Process()
+        self.cf_cli_path = cf_cli_path
 
     def login(self, api, user, password, skip_ssl=False):
         api_cmd = ["api", api]
@@ -26,7 +27,8 @@ class CFCliLibrary(object):
 
     def cf(self, *arguments, **configuration):
         configuration["env:CF_HOME"] = "./.cf_home"
-        result = self._process.run_process("cf", *arguments, **configuration)
+        configuration["env:CF_PLUGIN_HOME"] = expanduser("~")
+        result = self._process.run_process(self.cf_cli_path, *arguments, **configuration)
         result_msg = result.stdout
         if result_msg is None:
             result_msg = result.stderr
@@ -48,11 +50,21 @@ class CFCliLibrary(object):
         self.cf("create-space", space, "-o", org)
         return self.target(org, space)
 
+    def create_space_and_target(self, org, space):
+        self.cf("create-space", space, "-o", org)
+        return self.target(org, space)
+
     def get_first_buildpack(self, name):
         result = self.cf(*["buildpacks"])
         for line in result.splitlines():
-            if line.startswith(name):
-                return line.split()[0]
+            fields = line.strip().split()
+            if len(fields) < 2:
+                continue
+            if fields[0].startswith(name):
+                return fields[0]
+            # do the same job for cli v7 which set position first
+            if fields[1].startswith(name):
+                return fields[1]
         raise AssertionError('Buildpack with {} does not exists'.format(name))
 
     def delete_org(self, org):
@@ -75,6 +87,18 @@ class CFCliLibrary(object):
         finally:
             os.remove(filename)
         return tdir
+
+    def ensure_feature_flags(self, flags_config):
+        feature_flags = {}
+        result = self.cf(*["feature-flags"])
+        for line in result.splitlines():
+            fields = line.strip().split()
+            if len(fields) < 2:
+                continue
+            feature_flags[fields[0]] = fields[1]
+        for flag, state in flags_config.items():
+            if feature_flags[flag] != state:
+                raise AssertionError('Flag {} is not in requested state {}'.format(flag, state))
 
     def cleanup(self, kill=False):
         self._process.terminate_all_processes(kill)

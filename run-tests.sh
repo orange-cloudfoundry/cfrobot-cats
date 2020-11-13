@@ -7,4 +7,4 @@ do
     includes="${includes} --include ${include}"
 done
 
-robot ${includes} --include runtime .
+robot ${includes} --include runtime ./tests
