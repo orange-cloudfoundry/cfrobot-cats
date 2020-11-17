@@ -27,7 +27,7 @@ User auth can be set on an app and unset
 *** Keywords ***
 I set public route on my app ${name}
     cf  map-route  ${name}  %{CF_PUBLIC_DOMAIN}   --hostname  ${name}
-    Sleep   5s
+    Sleep   ${push_update_wait}
 
 I expect answer "${expected_response}" on public route for app ${name}
     Create Session  get_${name}   ${url_protocol}://${name}.%{CF_PUBLIC_DOMAIN}   verify=${python_request_verify_cert}

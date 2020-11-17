@@ -31,7 +31,7 @@ I set up logservice on app ${name}
     cf  restart   ${name}
 
 I expect to have logs received on logservice from app ${name}
-    Wait Until Keyword Succeeds   20x  50ms  expect to have logs received on logservice from app ${name}
+    Wait Until Keyword Succeeds   70x  50ms  expect to have logs received on logservice from app ${name}
 
 expect to have logs received on logservice from app ${name}
     I expect app ${name} to contains response "Hello from a binary"

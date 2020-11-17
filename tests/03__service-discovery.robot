@@ -24,6 +24,7 @@ I create a proxy app
 
 I set up internal route on app ${name} and set access policy to proxy app
     cf  map-route   ${name}   ${default_internal_domain}   --hostname  ${name}
+    Sleep  ${push_update_wait}
     cf  add-network-policy  ${app_proxy_name}  ${name}  --protocol  tcp  --port  8080
 
 I expect to reach app ${name} through proxy app

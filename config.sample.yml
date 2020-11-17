@@ -35,3 +35,5 @@ default_internal_domain: apps.internal
 # Optional, set it if you use `feature-flags` test
 expected_feature_flags:
   diego_docker: disabled
+# How long to wait after to have push/updated/scaled app(s)
+push_update_wait: 5s

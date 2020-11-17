@@ -18,14 +18,14 @@ I push an app named ${name:[^ ]*} with buildpack ${buildpack:[^ ]*} from folder 
     ${result}=  cf  push  --no-route   -b  ${buildpack_final}  -m  ${DEFAULT_MEMORY_LIMIT}   -k  ${DEFAULT_DISK_LIMIT}  -p  ${dir}  ${name}
     Log   ${result}
     cf  map-route   ${name}  %{CF_DOMAIN}  --hostname   ${name}
-    Sleep  5s
+    Sleep  ${push_update_wait}
 
 I push an app named ${name:[^ ]*} with buildpack ${buildpack:[^ ]*} from folder ${dir} with manifest path ${path}
     ${buildpack_final}=   get first buildpack   ${buildpack}
     ${result}=  cf  push  --no-route   -b  ${buildpack_final}  -m  ${DEFAULT_MEMORY_LIMIT}   -k  ${DEFAULT_DISK_LIMIT}  -p  ${dir}  -f  ${path}  ${name}
     Log   ${result}
     cf  map-route   ${name}  %{CF_DOMAIN}  --hostname   ${name}
-    Sleep  5s
+    Sleep  ${push_update_wait}
 
 I push an app named ${name:[^ ]*} with buildpack ${buildpack:[^ ]*} from asset ${asset:[^ ]*} with manifest
     I push an app named ${name} with buildpack ${buildpack} from folder ./assets/${asset} with manifest path ./assets/${asset}/manifest.yml
@@ -41,13 +41,13 @@ I push default binary app named ${name:[^ ]*}
     ${result}=  cf  push  --no-route   -b  ${buildpack}  -m  30M   -k  16M  -p  ${app_binary_folder}  ${name}
     Log   ${result}
     cf  map-route   ${name}  %{CF_DOMAIN}  --hostname   ${name}
-    Sleep  5s
+    Sleep  ${push_update_wait}
 
 I push default binary app named ${name:[^ ]*} with rolling strategy
     ${buildpack}=   get first buildpack   binary_buildpack
     ${result}=  cf  push   -b  ${buildpack}  -m  30M   -k  16M  -p  ${app_binary_folder}  --strategy  rolling  ${name}
     Log   ${result}
-    Sleep  10s
+    Sleep  ${push_update_wait}
 
 I expect app ${name:[^ ]*} from instance ${instance} to contains response "${expected_response}"
     ${app_guid}=  cf  app   ${name}   --guid

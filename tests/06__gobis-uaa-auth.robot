@@ -29,9 +29,9 @@ ${uaa_auth_instance_name}     my-uaa-auth-cfrobot-cats
 I set up uaa-auth user route service on app ${name}
     cf  create-service  ${gobis_route_service.service_name}   ${gobis_route_service.plan_name}  ${uaa_auth_instance_name}
     cf  bind-route-service  %{CF_DOMAIN}  --hostname  ${name}   ${uaa_auth_instance_name}
-    Sleep   20s
+    Sleep   ${push_update_wait}
 I unset uaa-auth user route service on app ${name}
     cf  unbind-route-service  %{CF_DOMAIN}  --hostname  ${name}  ${uaa_auth_instance_name}   -f
-    Sleep   20s
+    Sleep   ${push_update_wait}
 I expect to be redirected to login page from app ${name}
     I expect app ${name} from instance 0 to have response code "302"
