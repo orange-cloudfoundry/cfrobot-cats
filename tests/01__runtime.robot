@@ -47,7 +47,7 @@ I can have my logs from app ${name}
 I can scale app ${name} to ${n} instances and expect response from all instances
     cf  scale   ${name}   -i  ${n}
     Sleep  ${push_update_wait}
-    Wait Until Keyword Succeeds   expect response from all ${n} instances from app ${name}
+    Wait Until Keyword Succeeds  30x  50ms  expect response from all ${n} instances from app ${name}
 
 expect response from all ${n} instances from app ${name}
     FOR    ${instance}    IN RANGE    ${n}
