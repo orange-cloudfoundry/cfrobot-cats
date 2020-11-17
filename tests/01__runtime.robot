@@ -20,12 +20,12 @@ User can see logs
     When I push default binary app named %{CF_APP_NAME}
     Then I can have my logs from app %{CF_APP_NAME}
 App can be downloaded
-    [Tags]  runtime-app-download
+    [Tags]  runtime-app-download  runtime
     When I push default binary app named %{CF_APP_NAME}
     Then I download app %{CF_APP_NAME} and match file app with source dir ${app_binary_folder} on both side
 
 User can ssh into app
-    [Tags]  runtime-app-ssh
+    [Tags]  runtime-app-ssh  runtime
     When I push default binary app named %{CF_APP_NAME}
     Then I run command /usr/bin/env in ssh in app %{CF_APP_NAME} and expect to result to VCAP_APPLICATION=.*"application_name":"%{CF_APP_NAME}"
 
@@ -46,6 +46,10 @@ I can have my logs from app ${name}
 
 I can scale app ${name} to ${n} instances and expect response from all instances
     cf  scale   ${name}   -i  ${n}
+    Sleep  5s
+    Wait Until Keyword Succeeds   expect response from all ${n} instances from app ${name}
+
+expect response from all ${n} instances from app ${name}
     FOR    ${instance}    IN RANGE    ${n}
       I expect app ${name} from instance ${instance} to contains response "Hello from a binary"
     END
