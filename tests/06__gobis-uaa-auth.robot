@@ -8,8 +8,7 @@ Library           ../lib/HelperLibrary.py
 Library           RequestsLibrary
 Library           OperatingSystem
 Test Timeout      5 minutes
-Test Setup        Run Keywords
-...               cf  enable-service-access  ${gobis_route_service.service_name}  -o  ${org_name}
+Test Setup        cf  enable-service-access  ${gobis_route_service.service_name}  -o  ${org_name}
 Test Teardown     Run Keywords
 ...               cf  delete  %{CF_APP_NAME}   -f
 ...               AND  cf  unbind-route-service  %{CF_DOMAIN}  --hostname  %{CF_APP_NAME}  ${uaa_auth_instance_name}   -f
