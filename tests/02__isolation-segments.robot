@@ -6,7 +6,7 @@ Library           ../lib/CFCliLibrary.py
 Library           ../lib/HelperLibrary.py
 Library           RequestsLibrary
 Library           OperatingSystem
-Test Timeout      5 minutes
+Test Timeout      15 minutes
 Test Setup        Run Keywords
 ...               cf  enable-org-isolation  ${org_name}   ${isolation_segments.segment_name}
 ...               AND  create space and target  ${org_name}   ${isolation_segments.space_name}

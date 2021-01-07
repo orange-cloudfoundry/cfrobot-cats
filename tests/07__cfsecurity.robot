@@ -6,7 +6,7 @@ Library           ../lib/CFCliLibrary.py
 Library           ../lib/HelperLibrary.py
 Library           RequestsLibrary
 Library           OperatingSystem
-Test Timeout      5 minutes
+Test Timeout      15 minutes
 Test Setup        Run Keywords
 ...               I create a simple user for org ${org_name} and ${space_name}
 ...               AND   cf  create-security-group   ${security_group_name}  ./assets/sec-group-test.json

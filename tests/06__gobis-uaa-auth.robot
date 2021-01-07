@@ -7,7 +7,7 @@ Library           ../lib/CFCliLibrary.py
 Library           ../lib/HelperLibrary.py
 Library           RequestsLibrary
 Library           OperatingSystem
-Test Timeout      5 minutes
+Test Timeout      15 minutes
 Test Setup        cf  enable-service-access  ${gobis_route_service.service_name}  -o  ${org_name}
 Test Teardown     Run Keywords
 ...               cf  delete  %{CF_APP_NAME}   -f

@@ -5,7 +5,7 @@ Resource          ../resources/common.robot
 Library           ../lib/CFCliLibrary.py   ${cf_cli_path}
 Library           ../lib/HelperLibrary.py
 Library           RequestsLibrary
-Test Timeout      5 minutes
+Test Timeout      15 minutes
 Test Teardown     Run Keywords
 ...               cf  delete  %{CF_APP_NAME}   -f
 ...               AND  cf  delete  ${app_proxy_name}  -f

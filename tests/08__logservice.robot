@@ -8,7 +8,7 @@ Library           ../lib/HelperLibrary.py
 Library           ../lib/PrometheusLibrary.py
 Library           RequestsLibrary
 Library           OperatingSystem
-Test Timeout      5 minutes
+Test Timeout      15 minutes
 Test Teardown     Run Keywords
 ...               cf  delete  %{CF_APP_NAME}   -f
 ...               AND  cf  delete-orphaned-routes  -f
